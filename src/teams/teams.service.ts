@@ -9,10 +9,10 @@ export class TeamsService {
 
   private pool = () => this.db.getPool();
 
-  async createTeams( team_code: string, team_name: string, sport: string, division: string, founded_year: number, id: number) {
+  async createTeams( team_code: string, team_name: string, sport: string, division: string, founded_year: number) {
     const [result] = await this.pool().execute<OkPacket>(
-      'INSERT INTO teams (team_code, team_name, sport, division, founded_year, id) VALUES (?, ?, ?, ?, ?, ?)',
-      [team_code, team_name, sport, division, founded_year, id],
+      'INSERT INTO teams (team_code, team_name, sport, division, founded_year) VALUES (?, ?, ?, ?, ?)',
+      [team_code, team_name, sport, division, founded_year],
     );
 
     return { id: result.insertId, team_code, team_name, sport, division, founded_year, };
@@ -56,10 +56,6 @@ export class TeamsService {
     if (partial.founded_year) {
       fields.push('founded_year = ?');
       values.push(partial.founded_year);
-    }
-    if (partial.id) {
-      fields.push('id = ?');
-      values.push(partial.id);
     }
 
 

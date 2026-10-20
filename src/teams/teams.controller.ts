@@ -19,8 +19,8 @@ export class TeamsController {
   }
 
   @Post()
-  async create(@Body() body: { team_code: string; team_name: string; sport: string; division: string; founded_year: number; id: number; }) {
-    return this.teamsService.createTeams(body.team_code, body.team_name, body.sport, body.division, body.founded_year, body.id);
+  async create(@Body() body: { team_code: string; team_name: string; sport: string; division: string; founded_year: number; }) {
+    return this.teamsService.createTeams(body.team_code, body.team_name, body.sport, body.division, body.founded_year);
   }
 
   @UseGuards(JwtAuthGuard)
